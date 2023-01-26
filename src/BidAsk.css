@@ -1,0 +1,74 @@
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: bisque;
+}
+.page{
+    display: flex;
+    flex-direction: column;
+}
+
+.bidsasks{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: black;
+}
+
+.columns{
+    display: flex;
+    justify-content: space-between;
+    color: rgb(128, 127, 127);
+}
+.column{
+    width: 33%;
+    display:flex;
+    justify-content: flex-start;
+    line-height: 0;
+    color: rgb(223, 5, 5);
+    margin-left: 5px;
+    
+}
+.columnAsk{
+    width: 33%;
+    display:flex;
+    justify-content: flex-start;
+    line-height: 0;
+    color: green;
+    margin-left: 5px;
+    
+}
+.column1{
+    width: 20%;
+    display:flex;
+    justify-content: flex-end;
+    line-height: 0;
+    margin-right: 5px;
+    
+}
+
+.column > p,
+.column1 > p,
+.columnAsk > p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.pair > p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.pairInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    margin-top: -23px;
+    margin-bottom: -23px;
+
+}
+.pairSymbol{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
