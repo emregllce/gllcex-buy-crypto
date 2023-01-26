@@ -1,0 +1,24 @@
+.main{
+    display: flex;
+    justify-content: center;
+}
+
+.left{
+    width: 25%;
+    height: 100%;
+    min-height: 550px;
+    border: 1px solid;
+}
+.center{
+    width: 35%;
+    height: 60%;
+    min-height: 350px;
+    border: 1px solid;
+}
+.right{
+    border: 1px solid;
+    width: 25%;
+    height: 100%;
+    border: 1px solid;
+    min-height: 550px;
+}
