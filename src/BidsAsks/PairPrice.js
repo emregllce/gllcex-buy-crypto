@@ -20,7 +20,7 @@ const PairPrice = () => {
       }
     
       if (isError) {
-        return console.log(`error`, error);;
+        return console.log(`error`, error);
       }
 
   return (

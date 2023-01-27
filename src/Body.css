@@ -10,7 +10,7 @@
     border: 1px solid;
 }
 .center{
-    width: 40%;
+    width: 50%;
     height: 60%;
     min-height: 350px;
     border: 1px solid;
@@ -20,5 +20,6 @@
     width: 25%;
     height: 100%;
     border: 1px solid;
-    min-height: 550px;
+    max-height: 950px;
 }
+

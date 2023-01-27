@@ -13,19 +13,15 @@ const BidAsk = () => {
     "bidask", // unique querie key
     BidsAsks,
     {
-      // refetchInterval: 20000,
+      // refetchInterval: 200,
     }
   );
   if (isLoading) {
-    return <h4 style={{ textAlign: "center" }}>Loading...</h4>;
+    return <h4 style={{ textAlign: "center" }}>...</h4>;
   }
 
   if (isError) {
-    return (
-      <h3 style={{ textAlign: "center" }}>
-        Something went wrong please try again later...
-      </h3>
-    );
+    return console.log(`error`, error);
   }
   return (
     <div className="page">
@@ -41,26 +37,9 @@ const BidAsk = () => {
         </div>
       </div>
 
-      {data?.data?.bids.slice(81, 100).map((bid) => (
+      {data?.data?.asks.slice(0, 19).reverse().map((ask) => (
         <div className="columns">
           <div className="column">
-            <p>{parseFloat(bid[0]).toFixed(2)}</p>
-          </div>
-
-          <div className="column1">
-            <p>{parseFloat(bid[1]).toFixed(2)}</p>
-          </div>
-          <div className="column1">
-            <p>{parseFloat(bid[0] * bid[1]).toFixed(2)}</p>
-          </div>
-        </div>
-      ))}
-      <div className="pair">
-        < PairPrice />
-      </div>
-      {data?.data?.asks.slice(81, 100).map((ask) => (
-        <div className="columns">
-          <div className="columnAsk">
             <p>{parseFloat(ask[0]).toFixed(2)}</p>
           </div>
 
@@ -69,6 +48,23 @@ const BidAsk = () => {
           </div>
           <div className="column1">
             <p>{parseFloat(ask[0] * ask[1]).toFixed(2)}</p>
+          </div>
+        </div>
+      ))}
+      <div className="pair">
+        <PairPrice />
+      </div>
+      {data?.data?.bids.slice(0, 19).map((bid) => (
+        <div className="columns">
+          <div className="columnAsk">
+            <p>{parseFloat(bid[0]).toFixed(2)}</p>
+          </div>
+
+          <div className="column1">
+            <p>{parseFloat(bid[1]).toFixed(2)}</p>
+          </div>
+          <div className="column1">
+            <p>{parseFloat(bid[0] * bid[1]).toFixed(2)}</p>
           </div>
         </div>
       ))}
