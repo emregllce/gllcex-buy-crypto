@@ -13,7 +13,7 @@ const BidAsk = () => {
     "bidask", // unique querie key
     BidsAsks,
     {
-      // refetchInterval: 200,
+      refetchInterval: 200,
     }
   );
   if (isLoading) {

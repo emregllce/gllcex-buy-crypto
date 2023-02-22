@@ -2,7 +2,11 @@ import React from 'react'
 
 const CandleChart = () => {
   return (
-    <div>CandleChart</div>
+    <div>
+      
+      CandleChart
+     
+    </div>
   )
 }
 

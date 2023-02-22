@@ -6,6 +6,8 @@ import MarketHistory from "./MarketHistory";
 import Pairs from "./Pairs/Pairs";
 
 const Body = () => {
+
+
   return (
     <div className="main">
       <div className="left">

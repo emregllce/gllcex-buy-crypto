@@ -11,11 +11,6 @@ const Pairs = () => {
   // const btcPair = data?.data?.filter((pair)=>(
   //   pair.symbol.slice(-3) == "BTC"
   // ))
-
-  const PairInfo = () => {
-    return axios.get(`https://api.binance.com/api/v3/ticker/24hr`);
-  };
-
   const [favoritePair, setFavoritePair] = useState([]);
   const [pairType, setPairType] = useState("all");
   const usdtPair = [];
@@ -24,17 +19,22 @@ const Pairs = () => {
     <StarPurple500SharpIcon color="warning" />,
     "BTC",
     "USDT",
+    "ALL",
   ];
 
   const choosePair = (e) => {
     setPairType(e.target.innerHTML.slice(-3));
   };
 
+  const PairInfo = () => {
+    return axios.get(`https://api.binance.com/api/v3/ticker/24hr`);
+  };
+
   const { isLoading, isError, error, data } = useQuery(
     "pairdata", // unique querie key
     PairInfo,
     {
-      // refetchInterval: 200,
+      refetchInterval: 5000,
     }
   );
   if (isLoading) {
@@ -70,7 +70,7 @@ const Pairs = () => {
       </div>
       <div>
         {(() => {
-          if (pairType == "all") {
+          if (pairType == "ALL") {
             return (
               <div>
                 {data?.data?.slice(0, 200).map((pair) => (
@@ -100,21 +100,9 @@ const Pairs = () => {
               </div>
             );
           } else if (pairType == "SDT") {
-            return (
-              <UsdtPairs
-                data={data.data}
-                headerItems={headerItems}
-                choosePair={choosePair}
-              />
-            );
+            return <UsdtPairs data={data.data} />;
           } else if (pairType == "BTC") {
-            return (
-              <BtcPairs
-                data={data.data}
-                headerItems={headerItems}
-                choosePair={choosePair}
-              />
-            );
+            return <BtcPairs data={data.data} />;
           }
         })()}
       </div>
