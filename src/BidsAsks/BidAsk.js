@@ -13,7 +13,7 @@ const BidAsk = () => {
     "bidask", // unique querie key
     BidsAsks,
     {
-      refetchInterval: 200,
+      refetchInterval: 200
     }
   );
   if (isLoading) {
@@ -23,6 +23,9 @@ const BidAsk = () => {
   if (isError) {
     return console.log(`error`, error);
   }
+
+// console.log(data.data)
+
   return (
     <div className="page">
       <div className="header">
@@ -38,7 +41,7 @@ const BidAsk = () => {
       </div>
 
       {data?.data?.asks.slice(0, 19).reverse().map((ask) => (
-        <div className="columns">
+        <div className="columns" key={ask[0]}>
           <div className="column">
             <p>{parseFloat(ask[0]).toFixed(2)}</p>
           </div>
@@ -55,7 +58,7 @@ const BidAsk = () => {
         <PairPrice />
       </div>
       {data?.data?.bids.slice(0, 19).map((bid) => (
-        <div className="columns">
+        <div className="columns" key={bid[0]}>
           <div className="columnAsk">
             <p>{parseFloat(bid[0]).toFixed(2)}</p>
           </div>

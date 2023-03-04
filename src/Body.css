@@ -14,6 +14,7 @@
     height: 60%;
     min-height: 350px;
     border: 1px solid;
+    text-align: center;
 }
 .right{
     border: 1px solid;

@@ -1,13 +1,24 @@
+import {
+  Category,
+  ChartComponent,
+  DataLabel,
+  Inject,
+  Legend,
+  LineSeries,
+  SeriesCollectionDirective,
+  SeriesDirective,
+  Tooltip,
+} from "@syncfusion/ej2-react-charts";
 import React from "react";
 import BidAsk from "./BidsAsks/BidAsk";
 import "./Body.css";
+import { data } from "./data";
 import CandleChart from "./CandleChart/CandleChart";
+
 import MarketHistory from "./MarketHistory";
 import Pairs from "./Pairs/Pairs";
 
 const Body = () => {
-
-
   return (
     <div className="main">
       <div className="left">
@@ -15,6 +26,7 @@ const Body = () => {
       </div>
       <div className="center">
         <CandleChart />
+       
       </div>
       <div className="right">
         <Pairs />

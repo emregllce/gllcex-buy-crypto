@@ -12,7 +12,7 @@ const PairPrice = () => {
         "pairprice", // unique querie key
         PairPrice,
         {
-          // refetchInterval: 20000,
+          refetchInterval: 200,
         }
       );
       if (isLoading) {

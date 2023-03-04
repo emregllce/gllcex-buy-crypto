@@ -12,7 +12,7 @@ const Pairs = () => {
   //   pair.symbol.slice(-3) == "BTC"
   // ))
   const [favoritePair, setFavoritePair] = useState([]);
-  const [pairType, setPairType] = useState("all");
+  const [pairType, setPairType] = useState("ALL");
   const usdtPair = [];
 
   const headerItems = [
@@ -34,7 +34,7 @@ const Pairs = () => {
     "pairdata", // unique querie key
     PairInfo,
     {
-      refetchInterval: 5000,
+      refetchInterval: 20000,
     }
   );
   if (isLoading) {
@@ -44,11 +44,10 @@ const Pairs = () => {
   if (isError) {
     return console.log(`error`, error);
   }
-
+// console.log(data.data)
+  // console.log(`pairType`, pairType)
   return (
     <div className="pairDiv">
-      {/* {console.log(data.data.slice(0,3))} */}
-      {console.log(`pairType`, pairType)}
       <div className="pairs">
         {headerItems.map((header) => (
           <p className="pair" key={header} onClick={choosePair}>
