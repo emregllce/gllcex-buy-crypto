@@ -12,7 +12,6 @@ import {
 import React from "react";
 import BidAsk from "./BidsAsks/BidAsk";
 import "./Body.css";
-import { data } from "./data";
 import CandleChart from "./CandleChart/CandleChart";
 
 import MarketHistory from "./MarketHistory";

@@ -15,6 +15,7 @@
     "@syncfusion/ej2-pdf-export": "^20.4.48",
     "@syncfusion/ej2-react-base": "^20.4.48",
     "@syncfusion/ej2-react-charts": "^20.4.52",
+    "@syncfusion/ej2-splitbuttons": "^20.4.50",
     "@syncfusion/ej2-svg-base": "^20.4.48",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

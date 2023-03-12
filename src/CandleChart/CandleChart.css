@@ -1,1 +1,17 @@
-@import url("https://cdn.syncfusion.com/ej2/material.css")
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
+.btn-group{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 20px;
+}
+.button{
+    padding: 3px 15px;
+}
+.btn-line{
+    display: flex;
+    align-items: baseline;
+}
+.btn-header{
+    margin-right: 5px;
+}

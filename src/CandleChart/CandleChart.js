@@ -1,31 +1,58 @@
+import "./CandleChart.css";
+import { Browser } from "@syncfusion/ej2-base";
+import ButtonGroup from "./ButtonGroup";
+import * as React from "react";
+import { useState } from "react";
+
 import {
+  AxesDirective,
+  AxisDirective,
   ChartComponent,
+  ColumnSeries,
+  Crosshair,
+  DateTime,
   SeriesCollectionDirective,
   SeriesDirective,
   Inject,
+  DataLabel,
   Category,
   Tooltip,
   Zoom,
-  Crosshair,
   CandleSeries,
+  ScrollBar,
+  IndicatorsDirective,
+  IndicatorDirective,
+  StripLine,
+  Logarithmic,
+  LineSeries,
+  BollingerBands,
+  MacdIndicator,
+  RsiIndicator,
+  RangeAreaSeries,
 } from "@syncfusion/ej2-react-charts";
-import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 
-
 const CandleChart = () => {
 
+  const [interval, setInterval] = useState("1d")
+  const handleClick = (e) =>{
+    setInterval(e.target.innerHTML)
+    refetch()
+  } 
   const CandleData = () => {
-    return axios.get(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d`);
+    return axios.get(
+      `https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${interval}`
+    );
   };
 
   // interval = 1m 5m 15m 30m  1h 4h 1d 1w 1M
-  const { isLoading, isError, error, data } = useQuery(
+  const { isLoading, isError, error, data, refetch } = useQuery(
     "candledata", // unique querie key
     CandleData,
     {
       // refetchInterval: 2000
+      enabled: false
     }
   );
   if (isLoading) {
@@ -33,111 +60,107 @@ const CandleChart = () => {
   }
 
   if (isError) {
-    return <h1>error</h1>;
+    return console.log(error);
   }
 
-// console.log(data.data)
 
-  // const chartData = [
-  //   { x: "Jan", open: 120, high: 160, low: 100, close: 140 },
-  //   { x: "Feb", open: 150, high: 190, low: 130, close: 170 },
-  //   { x: "Mar", open: 130, high: 170, low: 110, close: 150 },
-  //   { x: "Apr", open: 160, high: 180, low: 120, close: 140 },
-  //   { x: "May", open: 150, high: 170, low: 110, close: 130 },
-  // ];
 
-  const chartData = data?.data.map((item)=>({
-    x:parseFloat(item[0]),
-    open:parseFloat(item[1]),
-    high:parseFloat(item[2]),
-    low:parseFloat(item[3]),
-    close:parseFloat(item[4])
-  }))
-  
-  const primaryxAxis = {
-    valueType: "Category",
-    majorGridLines: { width: 0 },
-  };
-  const primaryyAxis = {
-    minimum: chartData[499].open / 2,
-    maximum: chartData[499].open * 2 ,
-    interval: chartData[499].open / 10,
-  };
+  const chartData = data?.data.slice(0,150).map((item) => ({
+    x: parseFloat(item[0]),
+    open: parseFloat(item[1]),
+    high: parseFloat(item[2]),
+    low: parseFloat(item[3]),
+    close: parseFloat(item[4]),
+  }));
+  const chartarea = { border: { width: 0 } };
+  const lines = { width: 0 };
+  const animation = { enable: true };
+  const upperline = { color: "#ffb735", width: 1 };
+  const lowerline = { color: "#f2ec2f", width: 1 };
   const style = { textAlign: "center" };
-  const legendSettings = { visible: true };
 
   return (
-    <div className="chart-container">
-      <ChartComponent
-        id="charts"
-        style={style}
-        primaryXAxis={primaryxAxis}
-        primaryYAxis={primaryyAxis}
-        legendSettings={legendSettings}
-        title="Shirpur Gold Refinery Share Price"
-      >
-        <Inject services={[CandleSeries, Tooltip, Category, Crosshair, Zoom]} />
-        <SeriesCollectionDirective>
-          <SeriesDirective
-            dataSource={chartData}
-            xName="x"
-            yName="low"
-            name="SHIRPUR-G"
-            type="Candle"
-            low="low"
-            high="high"
-            open="open"
-            close="close"
-          ></SeriesDirective>
-        </SeriesCollectionDirective>
-      </ChartComponent>
-      
+    <div>
+      <div className="chart-container">
+        <ChartComponent
+          id="charts2"
+          crosshair={{ enable: true }}
+          chartArea={chartarea}
+          style={style}
+          tooltip={{ enable: true, shared: true }}
+          title="BTCUSDT"
+          primaryXAxis={{
+            valueType: "DateTime",
+            crosshairTooltip: { enable: true },
+          }}
+          primaryYAxis={{
+            opposedPosition: true,
+            crosshairTooltip: { enable: true },
+          }}
+          zoomSettings={{
+            enableMouseWheelZooming: true,
+            // enableSelectionZooming:true,
+            enableScrollbar: true,
+            enablePan: true,
+            toolbarItems: ["Reset"],
+          }}
+        >
+          <Inject
+            services={[
+              CandleSeries,
+              ColumnSeries,
+              DateTime,
+              DataLabel,
+              Tooltip,
+              Category,
+              Crosshair,
+              ScrollBar,
+              Zoom,
+              StripLine,
+              Logarithmic,
+              LineSeries,
+              BollingerBands,
+              MacdIndicator,
+              RsiIndicator,
+              RangeAreaSeries,
+            ]}
+          />
+          <SeriesCollectionDirective>
+            <SeriesDirective
+              dataSource={chartData}
+              xName="x"
+              yName="y"
+              name="BTCUSDT"
+              type="Candle"
+              low="low"
+              high="high"
+              open="open"
+              close="close"
+              volume="volume"
+              animation={animation}
+              bearFillColor="#2ecd71"
+              bullFillColor="#e74c3d"
+            ></SeriesDirective>
+          </SeriesCollectionDirective>
+          <IndicatorsDirective>
+            <IndicatorDirective
+              type="BollingerBands"
+              field="Close"
+              seriesName="BTCUSDT"
+              fill="#606eff"
+              period={14}
+              animation={animation}
+              upperLine={upperline}
+              lowerLine={lowerline}
+            ></IndicatorDirective>
+          </IndicatorsDirective>
+        </ChartComponent>
+        <ButtonGroup handleClick={handleClick} />
+        
+      </div>
+      <div>{/* <Rsi data={data} /> */}</div>
     </div>
   );
 };
 
 export default CandleChart;
-
-// import {
-//   Category,
-//   ChartComponent,
-//   DataLabel,
-//   Inject,
-//   Legend,
-//   LineSeries,
-//   SeriesCollectionDirective,
-//   SeriesDirective,
-//   Tooltip,
-// } from "@syncfusion/ej2-react-charts";
-// import React from "react";
-// import { data } from "../data";
-
-//  const CandleChart = () => {
-//   return (
-//     <div className="chart-container">
-//        <ChartComponent
-//           title="Sales Analysis"
-//           primaryXAxis={{ valueType: "Category", title: "Month" }}
-//           primaryYAxis={{ title: "Sales" }}
-//           legendSettings={{ visible: true }}
-//           tooltip={{ enable: true }}
-//         >
-//           <Inject
-//             services={[LineSeries, Category, Legend, DataLabel, Tooltip]}
-//           ></Inject>
-//           <SeriesCollectionDirective>
-//             <SeriesDirective
-//               type="Line"
-//               dataSource={data}
-//               xName="month"
-//               yName="sales"
-//               name="Sales"
-//               marker={{ dataLabel: { visible: true }, visible: true }}
-//             ></SeriesDirective>
-//           </SeriesCollectionDirective>
-//         </ChartComponent>
-//     </div>
-//   );
-// };
-
-// export default CandleChart;
