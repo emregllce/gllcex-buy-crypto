@@ -8,6 +8,11 @@
 .button{
     padding: 3px 15px;
 }
+
+.button:active{
+    background-color: #F7CA00;
+}
+
 .btn-line{
     display: flex;
     align-items: baseline;

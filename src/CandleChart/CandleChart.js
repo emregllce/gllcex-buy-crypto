@@ -38,7 +38,6 @@ const CandleChart = () => {
   const [interval, setInterval] = useState("1d")
   const handleClick = (e) =>{
     setInterval(e.target.innerHTML)
-    refetch()
   } 
   const CandleData = () => {
     return axios.get(
@@ -47,12 +46,11 @@ const CandleChart = () => {
   };
 
   // interval = 1m 5m 15m 30m  1h 4h 1d 1w 1M
-  const { isLoading, isError, error, data, refetch } = useQuery(
+  const { isLoading, isError, error, data } = useQuery(
     "candledata", // unique querie key
     CandleData,
     {
-      // refetchInterval: 2000
-      enabled: false
+      refetchInterval: 2000
     }
   );
   if (isLoading) {
@@ -65,7 +63,7 @@ const CandleChart = () => {
 
 
 
-  const chartData = data?.data.slice(0,150).map((item) => ({
+  const chartData = data?.data.slice(250,499).map((item) => ({
     x: parseFloat(item[0]),
     open: parseFloat(item[1]),
     high: parseFloat(item[2]),

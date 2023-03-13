@@ -14,7 +14,7 @@ import BidAsk from "./BidsAsks/BidAsk";
 import "./Body.css";
 import CandleChart from "./CandleChart/CandleChart";
 
-import MarketHistory from "./MarketHistory";
+import MarketHistory from "./MarketHistory/MarketHistory";
 import Pairs from "./Pairs/Pairs";
 
 const Body = () => {
