@@ -1,3 +1,4 @@
+import { registerLicense } from "@syncfusion/ej2-base";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
@@ -5,7 +6,7 @@ import App from "./App";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
-
+registerLicense("Mgo+DSMBaFt/QHRqVVhkVFpAaV5DQmFJfFBmRGJTflp6d1ZWESFaRnZdQV1gSH1Tf0VkWXdZcndV;Mgo+DSMBPh8sVXJ0S0J+XE9AflRGQmJIYVF2R2BJfl96dVFMY19BNQtUQF1hSn5Qd0ZjUH9ZcHxcR2hc;ORg4AjUWIQA/Gnt2VVhkQlFacldJWXxIf0x0RWFab19xflRCal9SVAciSV9jS31TdURgWXZed3RcRmZeUQ==;MTMxMjE3OEAzMjMwMmUzNDJlMzBLVzQ3QlM1aE1Pci92TlJOeGpVSFRRaXNsWHJqRVZ2QWJBVmlFaG43Y1BFPQ==;MTMxMjE3OUAzMjMwMmUzNDJlMzBuMnBSbTVxWnBlamcvbkFBY01IS1ZlN1g3YzEvbmVJazdmeW40QXJVczlrPQ==;NRAiBiAaIQQuGjN/V0Z+WE9EaFtKVmdWf1JpR2NbfE5xdV9HZFZSR2YuP1ZhSXxQdkZiWn9XcHNVT2ZYUkc=;MTMxMjE4MUAzMjMwMmUzNDJlMzBIWXJJMjg1blk5bnNPelV3N3BzWk5mNzZwWlJGS0R4ci9OelNlQlBxK0NNPQ==;MTMxMjE4MkAzMjMwMmUzNDJlMzBFM0hVRzlYQWtiQkY0QW9Eby9YcVV5RnBRU0crMWtsRFk4V1ZzNTJFbEs4PQ==;Mgo+DSMBMAY9C3t2VVhkQlFacldJWXxIf0x0RWFab19xflRCal9SVAciSV9jS31TdURgWXZed3VVRWFZVQ==;MTMxMjE4NEAzMjMwMmUzNDJlMzBOODJwMGlYYlFzV3lzZVBrWjJVbXlSa1ZHWE4rRnJYS3phbDB6d3dmd0VZPQ==;MTMxMjE4NUAzMjMwMmUzNDJlMzBveGd3UjhlaUhZc3NZa2NFaDFWUURvcE9GT0pBUnVNRmtadG1zSysyMElRPQ==;MTMxMjE4NkAzMjMwMmUzNDJlMzBIWXJJMjg1blk5bnNPelV3N3BzWk5mNzZwWlJGS0R4ci9OelNlQlBxK0NNPQ==")
 root.render(
   <StrictMode>
     <App />
