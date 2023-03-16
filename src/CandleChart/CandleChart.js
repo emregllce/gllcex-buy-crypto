@@ -50,7 +50,7 @@ const CandleChart = () => {
     "candledata", // unique querie key
     CandleData,
     {
-      refetchInterval: 2000
+      refetchInterval: 1000
     }
   );
   if (isLoading) {
