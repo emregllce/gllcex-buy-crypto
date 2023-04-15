@@ -17,6 +17,7 @@ const ButtonGroup = ({handleClick}) => {
           <button onClick={handleClick} className="button">4h</button>
           <button onClick={handleClick} className="button">1d</button>
           <button onClick={handleClick} className="button">1w</button>
+          <button onClick={handleClick} className="button">1M</button>
         </div>
       </div>
     </div>
