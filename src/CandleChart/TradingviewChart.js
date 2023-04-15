@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import ButtonGroup from "./ButtonGroup";
+import "./Chart.css";
+
 
 export const ChartComponent = (props) => {
   const {
