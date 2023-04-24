@@ -5,7 +5,6 @@ import axios from "axios";
 import ButtonGroup from "./ButtonGroup";
 import "./Chart.css";
 
-
 export const ChartComponent = (props) => {
   const {
     data,
@@ -68,10 +67,9 @@ export function MyApp(props) {
 
   const handleClick = (e) => {
     setInterval(e.target.innerHTML);
-
     setTimeout(() => {
       refetch();
-    }, 100);
+    }, 50);
   };
   const CandleData = () => {
     return axios.get(

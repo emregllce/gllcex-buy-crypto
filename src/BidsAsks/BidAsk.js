@@ -13,7 +13,7 @@ const BidAsk = () => {
     "bidask", // unique querie key
     BidsAsks,
     {
-      refetchInterval: 200
+      // refetchInterval: 200
     }
   );
   if (isLoading) {
@@ -24,7 +24,7 @@ const BidAsk = () => {
     return console.log(`error`, error);
   }
 
-// console.log(data.data)
+console.log("biddata",data.data)
 
   return (
     <div className="page">
