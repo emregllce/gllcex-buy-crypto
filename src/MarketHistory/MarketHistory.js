@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
-import "./MarketHistory.css"
+import "./MarketHistory.css";
 
 const MarketHistory = () => {
   const MarketTrades = () => {
@@ -12,7 +12,7 @@ const MarketHistory = () => {
     "markethistory", // unique querie key
     MarketTrades,
     {
-      // refetchInterval: 200
+      refetchInterval: 200
     }
   );
   if (isLoading) {
@@ -23,9 +23,12 @@ const MarketHistory = () => {
     return console.log(`error`, error);
   }
 
-console.log(data)
+  console.log(data.data);
   return (
-    <div className='page'>
+    <div className="page">
+      <div className="header-head">
+        <h4>Market Trades</h4>
+      </div>
       <div className="header">
         <div className="column" style={{ color: "black" }}>
           <p>Price(USDT)</p>
@@ -37,22 +40,39 @@ console.log(data)
           <p>Time</p>
         </div>
       </div>
-      {data?.data?.slice(0, 19).map((history) => (
-        <div className="columns" key={history.id}>
-          <div className="columnAsk">
-            <p>{parseFloat(history.price).toFixed(2)}</p>
-          </div>
+      {data?.data?.slice(0, 19).map((history) => {
+        const date = new Date(history.time);
+        const formattedTime = date.toLocaleTimeString("en-US", {
+          timeZone: 'GMT',
+          hour12: false,
+          hour: "2-digit",
+          minute: "2-digit",
+          second:"2-digit"
+        });
+        // console.log(formattedTime);
+        return (
+          <div className="columns" key={history.id}>
+            <div className="columnAsk">
+              <p 
+              className={
+                history.isBuyerMaker == true
+                ?"greenChange"
+                :"redChange"
+              }>
+                {parseFloat(history.price).toFixed(2)}</p>
+            </div>
 
-          <div className="column1">
-            <p>{parseFloat(history.qty).toFixed(4)}</p>
+            <div className="column1">
+              <p>{parseFloat(history.qty).toFixed(4)}</p>
+            </div>
+            <div className="column1">
+              <p>{formattedTime}</p>
+            </div>
           </div>
-          <div className="column1">
-            <p>{parseFloat(history.time)}</p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
-  )
-}
+  );
+};
 
-export default MarketHistory
+export default MarketHistory;
