@@ -25,7 +25,7 @@ const MarketHistory = () => {
 
   console.log(data.data);
   return (
-    <div className="page">
+    <div className="pageMT">
       <div className="header-head">
         <h4>Market Trades</h4>
       </div>
@@ -40,7 +40,7 @@ const MarketHistory = () => {
           <p>Time</p>
         </div>
       </div>
-      {data?.data?.slice(0, 19).map((history) => {
+      {data?.data?.slice(0, 20).map((history) => {
         const date = new Date(history.time);
         const formattedTime = date.toLocaleTimeString("en-US", {
           timeZone: 'GMT',

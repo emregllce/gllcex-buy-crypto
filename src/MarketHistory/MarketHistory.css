@@ -11,9 +11,13 @@
 .header-head > h4 {
     margin: 0;
 }
-.page{
+.pageMT{
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
+    max-height: 550px;
+    overflow-x:hidden;
+    overflow-y:auto
 }
 
 .bidsasks{
