@@ -1,4 +1,3 @@
-@import url("https://cdn.syncfusion.com/ej2/material.css");
 
 .btn-group{
     display: flex;
@@ -7,10 +6,14 @@
 }
 .button{
     padding: 3px 15px;
+    cursor: pointer;
 }
 
-.button:active{
+/* .button:active{
     background-color: #F7CA00;
+} */
+.button:focus{
+    background-color: #b99a0e;
 }
 
 .btn-line{

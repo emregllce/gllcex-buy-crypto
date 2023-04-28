@@ -76,7 +76,6 @@ export function MyApp(props) {
       `https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${interval}`
     );
   };
-  console.log(interval);
 
   const { isLoading, isError, error, data, refetch } = useQuery(
     "candledata", // unique querie key
@@ -89,7 +88,7 @@ export function MyApp(props) {
   if (isError) {
     return console.log(error);
   }
-  console.log(data);
+  // console.log(data);
   const initialData = data?.data.map((item) => ({
     time: item[0] / 1000,
     open: parseFloat(item[1]),

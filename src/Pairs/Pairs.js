@@ -8,9 +8,6 @@ import UsdtPairs from "./UsdtPairs";
 import BtcPairs from "./BtcPairs";
 
 const Pairs = () => {
-  // const btcPair = data?.data?.filter((pair)=>(
-  //   pair.symbol.slice(-3) == "BTC"
-  // ))
   const [favoritePair, setFavoritePair] = useState([]);
   const [pairType, setPairType] = useState("ALL");
   const usdtPair = [];
@@ -22,10 +19,20 @@ const Pairs = () => {
     "ALL",
   ];
 
-  const choosePair = (e) => {
+  const chooseType = (e) => {
     setPairType(e.target.innerHTML.slice(-3));
   };
-
+  const choosePair = (e) => {};
+  const addFav = (e) => {
+    //console.log(`e`, e.target.parentElement.parentElement.parentElement.children[1].innerHTML);
+    //console.log(`e`, e.target.checked);
+    if (e.target.checked) {
+      setFavoritePair([...favoritePair, e.target.parentElement.parentElement.parentElement.children[1].innerHTML])
+    }else{
+      setFavoritePair(favoritePair.filter(item => item !== e.target.parentElement.parentElement.parentElement.children[1].innerHTML))
+    }
+  };
+console.log(`favoritePair`, favoritePair);
   const PairInfo = () => {
     return axios.get(`https://api.binance.com/api/v3/ticker/24hr`);
   };
@@ -44,13 +51,13 @@ const Pairs = () => {
   if (isError) {
     return console.log(`error`, error);
   }
-// console.log(data.data)
+  // console.log(data.data)
   // console.log(`pairType`, pairType)
   return (
     <div className="pairDiv">
       <div className="pairs">
         {headerItems.map((header) => (
-          <p className="pair" key={header} onClick={choosePair}>
+          <p className="pair" key={header} onClick={chooseType}>
             {header}
           </p>
         ))}
@@ -75,8 +82,11 @@ const Pairs = () => {
                 {data?.data?.slice(0, 200).map((pair) => (
                   <div className="columns">
                     <div className="column" style={{ display: "flex" }}>
-                      <p className="favorite">
-                        <FavoriteIcon /> {pair.symbol}
+                      <p className="favorite " onClick={addFav}>
+                        <FavoriteIcon />
+                      </p>
+                      <p className="choosePair" onClick={choosePair}>
+                        {pair.symbol}
                       </p>
                     </div>
 
@@ -110,13 +120,3 @@ const Pairs = () => {
 };
 
 export default Pairs;
-
-// else if (pairType == "SDT"){
-//   return(
-//     < UsdtPairs data = {data.data} headerItems={headerItems} choosePair={choosePair}/>
-//   )
-// } else if (pairType == "BTC"){
-//   return(
-//     < BtcPairs data = {data.data} headerItems={headerItems} choosePair={choosePair}/>
-//   )
-// }

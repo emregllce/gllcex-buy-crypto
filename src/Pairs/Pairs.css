@@ -21,6 +21,7 @@
     align-items: center;
     margin: 0;
     color: rgb(128, 127, 127);
+    cursor: pointer
 }
 
 .greenChange{

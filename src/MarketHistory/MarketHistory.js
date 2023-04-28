@@ -23,7 +23,7 @@ const MarketHistory = () => {
     return console.log(`error`, error);
   }
 
-  console.log(data.data);
+  // console.log(data.data);
   return (
     <div className="pageMT">
       <div className="header-head">
