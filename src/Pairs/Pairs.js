@@ -6,11 +6,15 @@ import StarPurple500SharpIcon from "@mui/icons-material/StarPurple500Sharp";
 import FavoriteIcon from "./FavoriteIcon";
 import UsdtPairs from "./UsdtPairs";
 import BtcPairs from "./BtcPairs";
+import { useSelector, useDispatch } from "react-redux";
+import { addToFav, removeFromFav } from "../redux/pairSlice";
 
 const Pairs = () => {
-  const [favoritePair, setFavoritePair] = useState([]);
+  // const [favoritePair, setFavoritePair] = useState([]);
   const [pairType, setPairType] = useState("ALL");
   const usdtPair = [];
+  const dispatch = useDispatch();
+  const favoritePair = useSelector((state) => state.pair.favoritePairs);
 
   const headerItems = [
     <StarPurple500SharpIcon color="warning" />,
@@ -23,16 +27,32 @@ const Pairs = () => {
     setPairType(e.target.innerHTML.slice(-3));
   };
   const choosePair = (e) => {};
+
   const addFav = (e) => {
-    //console.log(`e`, e.target.parentElement.parentElement.parentElement.children[1].innerHTML);
-    //console.log(`e`, e.target.checked);
-    if (e.target.checked) {
-      setFavoritePair([...favoritePair, e.target.parentElement.parentElement.parentElement.children[1].innerHTML])
-    }else{
-      setFavoritePair(favoritePair.filter(item => item !== e.target.parentElement.parentElement.parentElement.children[1].innerHTML))
+    if (
+      favoritePair.includes(
+        e.target.parentElement.parentElement.parentElement.children[1].innerHTML
+      )
+    ) {
+      dispatch(
+        removeFromFav(
+          e.target.parentElement.parentElement.parentElement.children[1]
+            .innerHTML
+        )
+      );
+      e.target.checked = false;
+    } else {
+      dispatch(
+        addToFav(
+          e.target.parentElement.parentElement.parentElement.children[1]
+            .innerHTML
+        )
+      );
+      e.target.checked = true;
     }
   };
-console.log(`favoritePair`, favoritePair);
+  // console.log(`favoritePair`, favoritePair);
+
   const PairInfo = () => {
     return axios.get(`https://api.binance.com/api/v3/ticker/24hr`);
   };
@@ -41,7 +61,7 @@ console.log(`favoritePair`, favoritePair);
     "pairdata", // unique querie key
     PairInfo,
     {
-      refetchInterval: 20000,
+      refetchInterval: 10000,
     }
   );
   if (isLoading) {
@@ -51,8 +71,8 @@ console.log(`favoritePair`, favoritePair);
   if (isError) {
     return console.log(`error`, error);
   }
-  // console.log(data.data)
-  // console.log(`pairType`, pairType)
+
+  console.log(`favoritePair`, favoritePair);
   return (
     <div className="pairDiv">
       <div className="pairs">
@@ -80,10 +100,10 @@ console.log(`favoritePair`, favoritePair);
             return (
               <div>
                 {data?.data?.slice(0, 200).map((pair) => (
-                  <div className="columns">
+                  <div className="columns" key={pair.symbol}>
                     <div className="column" style={{ display: "flex" }}>
                       <p className="favorite " onClick={addFav}>
-                        <FavoriteIcon />
+                        <FavoriteIcon symbol={pair.symbol}/>
                       </p>
                       <p className="choosePair" onClick={choosePair}>
                         {pair.symbol}
@@ -109,9 +129,21 @@ console.log(`favoritePair`, favoritePair);
               </div>
             );
           } else if (pairType == "SDT") {
-            return <UsdtPairs data={data.data} />;
+            return (
+              <UsdtPairs
+                data={data.data}
+                addFav={addFav}
+                choosePair={choosePair}
+              />
+            );
           } else if (pairType == "BTC") {
-            return <BtcPairs data={data.data} />;
+            return (
+              <BtcPairs
+                data={data.data}
+                addFav={addFav}
+                choosePair={choosePair}
+              />
+            );
           }
         })()}
       </div>

@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
+    "@reduxjs/toolkit": "^1.9.5",
     "@syncfusion/ej2-base": "^20.4.51",
     "@syncfusion/ej2-charts": "^20.4.52",
     "@syncfusion/ej2-compression": "^20.4.48",
@@ -26,8 +27,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
+    "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.6",
+    "redux": "^4.2.1",
     "requery": "^0.0.5",
     "web-vitals": "^2.1.4"
   },
