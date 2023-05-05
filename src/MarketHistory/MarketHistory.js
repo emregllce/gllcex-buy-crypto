@@ -2,17 +2,22 @@ import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import "./MarketHistory.css";
+import { useSelector, useDispatch } from "react-redux";
 
 const MarketHistory = () => {
+  const selectedPair = useSelector((state) => state.pair.selectedPair);
+
   const MarketTrades = () => {
-    return axios.get(`https://api.binance.com/api/v3/trades?symbol=BTCUSDT`);
+    return axios.get(
+      `https://api.binance.com/api/v3/trades?symbol=${selectedPair}`
+    );
   };
 
   const { isLoading, isError, error, data } = useQuery(
     "markethistory", // unique querie key
     MarketTrades,
     {
-      refetchInterval: 200
+      refetchInterval: 200,
     }
   );
   if (isLoading) {
@@ -31,10 +36,13 @@ const MarketHistory = () => {
       </div>
       <div className="header">
         <div className="column" style={{ color: "black" }}>
-          <p>Price(USDT)</p>
+          <p>
+            Price(
+            {selectedPair.slice(-3) == "SDT" ? "USDT" : selectedPair.slice(-3)})
+          </p>
         </div>
         <div className="column1">
-          <p>Amount(BTC)</p>
+          <p>Amount({selectedPair.slice(0, 3)})</p>
         </div>
         <div className="column1">
           <p>Time</p>
@@ -43,23 +51,23 @@ const MarketHistory = () => {
       {data?.data?.slice(0, 20).map((history) => {
         const date = new Date(history.time);
         const formattedTime = date.toLocaleTimeString("en-US", {
-          timeZone: 'GMT',
+          timeZone: "GMT",
           hour12: false,
           hour: "2-digit",
           minute: "2-digit",
-          second:"2-digit"
+          second: "2-digit",
         });
         // console.log(formattedTime);
         return (
           <div className="columns" key={history.id}>
             <div className="columnAsk">
-              <p 
-              className={
-                history.isBuyerMaker == true
-                ?"greenChange"
-                :"redChange"
-              }>
-                {parseFloat(history.price).toFixed(2)}</p>
+              <p
+                className={
+                  history.isBuyerMaker == true ? "greenChange" : "redChange"
+                }
+              >
+                {parseFloat(history.price) < 1 ? parseFloat(history.price) : parseFloat(history.price).toFixed(2)}
+              </p>
             </div>
 
             <div className="column1">

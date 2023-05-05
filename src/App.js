@@ -1,5 +1,5 @@
 import { QueryClientProvider, QueryClient } from "react-query";
-import Appbar1 from "./Appbar1";
+import Appbar from "./Appbar";
 import Body from "./Body";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -11,7 +11,7 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <div>
-          <Appbar1 />
+          <Appbar />
           <Body />
         </div>
       </QueryClientProvider>

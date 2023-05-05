@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToFav, removeFromFav } from "../redux/pairSlice";
 
 const BtcPairs = ({ data, addFav, choosePair }) => {
-  const dispatch = useDispatch();
-  const favoritePair = useSelector((state) => state.pair.favoritePairs);
+  const searchPairs = useSelector((state) => state.pair.searchPairs);
+
   return (
     <div>
       {data
@@ -15,7 +15,7 @@ const BtcPairs = ({ data, addFav, choosePair }) => {
             <div className="column" style={{ display: "flex" }}>
 
               <p className="favorite " onClick={addFav}>
-                <FavoriteIcon />
+                <FavoriteIcon symbol={pair.symbol}/>
               </p>
               <p className="choosePair" onClick={choosePair}>
                 {pair.symbol}

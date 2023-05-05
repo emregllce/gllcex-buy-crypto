@@ -7,6 +7,9 @@ import Container from "@mui/material/Container";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import { useState } from "react";
+import { searchPair } from "./redux/pairSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -50,9 +53,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+function Appbar() {
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
 
-function Appbar1() {
-
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+    dispatch(searchPair(e.target.value))
+  };
 
   return (
     <AppBar position="static">
@@ -63,14 +72,13 @@ function Appbar1() {
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               justifyContent: "center",
+              fontSize: "24px",
             }}
           >
             GLLCEX
           </Typography>
 
           <Box sx={{ flexGrow: 0 }}>
-            
-            
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -78,6 +86,7 @@ function Appbar1() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                onChange={handleChange}
               />
             </Search>
           </Box>
@@ -86,4 +95,4 @@ function Appbar1() {
     </AppBar>
   );
 }
-export default Appbar1;
+export default Appbar;

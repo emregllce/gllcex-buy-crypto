@@ -7,14 +7,15 @@
 .button{
     padding: 3px 15px;
     cursor: pointer;
+    
 }
 
-/* .button:active{
+.button:active{
     background-color: #F7CA00;
-} */
-.button:focus{
-    background-color: #b99a0e;
 }
+/* .button:focus{
+    background-color: #b99a0e;
+} */
 
 .btn-line{
     display: flex;

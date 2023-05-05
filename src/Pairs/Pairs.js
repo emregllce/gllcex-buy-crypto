@@ -6,16 +6,16 @@ import StarPurple500SharpIcon from "@mui/icons-material/StarPurple500Sharp";
 import FavoriteIcon from "./FavoriteIcon";
 import UsdtPairs from "./UsdtPairs";
 import BtcPairs from "./BtcPairs";
+import FavPairs from "./FavPairs";
 import { useSelector, useDispatch } from "react-redux";
-import { addToFav, removeFromFav } from "../redux/pairSlice";
+import { addToFav, removeFromFav, selectPair } from "../redux/pairSlice";
 
 const Pairs = () => {
   // const [favoritePair, setFavoritePair] = useState([]);
   const [pairType, setPairType] = useState("ALL");
-  const usdtPair = [];
   const dispatch = useDispatch();
   const favoritePair = useSelector((state) => state.pair.favoritePairs);
-
+  const searchPairs = useSelector((state) => state.pair.searchPairs);
   const headerItems = [
     <StarPurple500SharpIcon color="warning" />,
     "BTC",
@@ -26,7 +26,10 @@ const Pairs = () => {
   const chooseType = (e) => {
     setPairType(e.target.innerHTML.slice(-3));
   };
-  const choosePair = (e) => {};
+  const choosePair = (e) => {
+    // console.log(`e.target.innerHTML`, e.target.innerHTML);
+    dispatch(selectPair(e.target.innerHTML));
+  };
 
   const addFav = (e) => {
     if (
@@ -71,8 +74,6 @@ const Pairs = () => {
   if (isError) {
     return console.log(`error`, error);
   }
-
-  console.log(`favoritePair`, favoritePair);
   return (
     <div className="pairDiv">
       <div className="pairs">
@@ -103,7 +104,7 @@ const Pairs = () => {
                   <div className="columns" key={pair.symbol}>
                     <div className="column" style={{ display: "flex" }}>
                       <p className="favorite " onClick={addFav}>
-                        <FavoriteIcon symbol={pair.symbol}/>
+                        <FavoriteIcon symbol={pair.symbol} />
                       </p>
                       <p className="choosePair" onClick={choosePair}>
                         {pair.symbol}
@@ -139,6 +140,14 @@ const Pairs = () => {
           } else if (pairType == "BTC") {
             return (
               <BtcPairs
+                data={data.data}
+                addFav={addFav}
+                choosePair={choosePair}
+              />
+            );
+          } else {
+            return (
+              <FavPairs
                 data={data.data}
                 addFav={addFav}
                 choosePair={choosePair}

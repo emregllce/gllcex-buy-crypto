@@ -1,5 +1,6 @@
 .pairDiv{
     max-height: 410px;
+    min-height: 410px;
     overflow-x:hidden;
     overflow-y:auto
 }
@@ -32,4 +33,8 @@
 .redChange{
     color: rgb(223, 5, 5);
     
+}
+
+.choosePair{
+    cursor: pointer;
 }
