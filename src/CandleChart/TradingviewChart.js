@@ -4,6 +4,8 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import ButtonGroup from "./ButtonGroup";
 import "./Chart.css";
+import { useSelector, useDispatch } from "react-redux";
+
 
 export const ChartComponent = (props) => {
   const {
@@ -64,6 +66,8 @@ export const ChartComponent = (props) => {
 
 export function MyApp(props) {
   const [interval, setInterval] = useState("1d");
+  const selectedPair = useSelector((state) => state.pair.selectedPair);
+
 
   const handleClick = (e) => {
     setInterval(e.target.innerHTML);
@@ -73,7 +77,7 @@ export function MyApp(props) {
   };
   const CandleData = () => {
     return axios.get(
-      `https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${interval}`
+      `https://api.binance.com/api/v3/klines?symbol=${selectedPair}&interval=${interval}`
     );
   };
 
