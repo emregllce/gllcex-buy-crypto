@@ -68,6 +68,12 @@ export function MyApp(props) {
   const [interval, setInterval] = useState("1d");
   const selectedPair = useSelector((state) => state.pair.selectedPair);
 
+  useEffect(() => {
+    setTimeout(() => {
+      refetch();
+    }, 50);
+  }, [selectedPair])
+
 
   const handleClick = (e) => {
     setInterval(e.target.innerHTML);
@@ -80,7 +86,7 @@ export function MyApp(props) {
       `https://api.binance.com/api/v3/klines?symbol=${selectedPair}&interval=${interval}`
     );
   };
-
+  
   const { isLoading, isError, error, data, refetch } = useQuery(
     "candledata", // unique querie key
     CandleData
@@ -102,6 +108,7 @@ export function MyApp(props) {
   }));
   return (
     <div>
+      <h3>{selectedPair}</h3>
       <ChartComponent {...props} data={initialData}></ChartComponent>
       <ButtonGroup handleClick={handleClick} />
     </div>
