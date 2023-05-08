@@ -9,13 +9,16 @@ const BtcPairs = ({ data, addFav, choosePair }) => {
   return (
     <div>
       {data
-        ?.filter((btcPair) => btcPair.symbol.slice(-3) == "BTC")
+        ?.filter(
+          (btcPair) =>
+            btcPair.symbol.slice(-3) == "BTC" &&
+            btcPair.symbol.includes(searchPairs.toUpperCase())
+        )
         .map((pair) => (
           <div className="columns" key={pair.symbol}>
             <div className="column" style={{ display: "flex" }}>
-
               <p className="favorite " onClick={addFav}>
-                <FavoriteIcon symbol={pair.symbol}/>
+                <FavoriteIcon symbol={pair.symbol} />
               </p>
               <p className="choosePair" onClick={choosePair}>
                 {pair.symbol}

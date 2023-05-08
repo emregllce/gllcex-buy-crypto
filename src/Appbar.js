@@ -55,11 +55,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Appbar() {
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
-    setSearch(e.target.value);
+    // setSearch(e.target.value);
     dispatch(searchPair(e.target.value))
   };
 
@@ -73,6 +73,7 @@ function Appbar() {
               display: { xs: "none", md: "flex" },
               justifyContent: "center",
               fontSize: "24px",
+              marginLeft: "100px"
             }}
           >
             GLLCEX

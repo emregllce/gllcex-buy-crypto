@@ -21,6 +21,7 @@ export const pairSlice = createSlice({
         },
         searchPair(state,action){
             state.searchPairs = action.payload
+            // console.log(action.payload)
         }
     }
 })

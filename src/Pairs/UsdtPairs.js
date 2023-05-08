@@ -4,11 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 const UsdtPairs = ({ data, addFav, choosePair }) => {
   const searchPairs = useSelector((state) => state.pair.searchPairs);
-  
+
   return (
     <div>
       {data
-        ?.filter((usdtPair) => usdtPair.symbol.slice(-3) == "SDT")
+        ?.filter(
+          (usdtPair) =>
+            usdtPair.symbol.slice(-3) == "SDT" &&
+            usdtPair.symbol.includes(searchPairs.toUpperCase())
+        )
         .map((pair) => (
           <div className="columns" key={pair.symbol}>
             <div className="column" style={{ display: "flex" }}>
