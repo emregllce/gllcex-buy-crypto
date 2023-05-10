@@ -4,6 +4,7 @@ import "./Body.css";
 import MarketHistory from "./MarketHistory/MarketHistory";
 import Pairs from "./Pairs/Pairs";
 import {MyApp} from "./CandleChart/TradingviewChart";
+import Trade from "./Trade/Trade";
 
 const Body = () => {
   return (
@@ -13,6 +14,7 @@ const Body = () => {
       </div>
       <div className="center">
         < MyApp />
+        < Trade />
       </div>
       <div className="right">
         <Pairs />

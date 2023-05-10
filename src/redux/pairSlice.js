@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     favoritePairs : [],
     selectedPair : "BTCUSDT",
+    pairPrice:"",
     searchPairs: ""
 }
 
@@ -12,6 +13,10 @@ export const pairSlice = createSlice({
     reducers:{
         selectPair(state, action){
             state.selectedPair = action.payload
+        },
+        setPrice(state,action){
+            state.pairPrice = action.payload
+            console.log(state.pairPrice)
         },
         addToFav(state, action){
             state.favoritePairs.push(action.payload)
@@ -27,5 +32,5 @@ export const pairSlice = createSlice({
 })
 
 
-export const { selectPair, addToFav, removeFromFav, searchPair} = pairSlice.actions
+export const { selectPair, setPrice, addToFav, removeFromFav, searchPair} = pairSlice.actions
 export default pairSlice.reducer;

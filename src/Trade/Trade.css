@@ -1,0 +1,24 @@
+.trade{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.buttons{
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.formContainer{
+    display: flex;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+}
+.leftForm{
+    margin-right: 20px;
+
+}

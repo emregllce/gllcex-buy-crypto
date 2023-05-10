@@ -8,7 +8,7 @@ import UsdtPairs from "./UsdtPairs";
 import BtcPairs from "./BtcPairs";
 import FavPairs from "./FavPairs";
 import { useSelector, useDispatch } from "react-redux";
-import { addToFav, removeFromFav, selectPair } from "../redux/pairSlice";
+import { addToFav, setPrice, removeFromFav, selectPair } from "../redux/pairSlice";
 
 const Pairs = () => {
   // const [favoritePair, setFavoritePair] = useState([]);
@@ -27,8 +27,9 @@ const Pairs = () => {
     setPairType(e.target.innerHTML.slice(-3));
   };
   const choosePair = (e) => {
-    // console.log(`e.target.innerHTML`, e.target.innerHTML);
+    //console.log(`e.target.innerHTML`, e.target.parentElement.parentElement.children[1].children[0].innerHTML);
     dispatch(selectPair(e.target.innerHTML));
+    dispatch(setPrice(e.target.parentElement.parentElement.children[1].children[0].innerHTML))
   };
 
   const addFav = (e) => {
@@ -53,6 +54,8 @@ const Pairs = () => {
       );
       e.target.checked = true;
     }
+    console.log(e.target.parentElement.parentElement.parentElement.children[1]
+      .innerHTML);
   };
   // console.log(`favoritePair`, favoritePair);
 
