@@ -13,7 +13,7 @@ const Trade = () => {
       <div className="buttons">
         <ButtonGroup alignment={alignment} handleChange = {handleChange}/>
       </div>
-      <div>
+      <div className="inputs">
         <Inputs alignment={alignment}/>
       </div>
       <div></div>

@@ -39,6 +39,10 @@ export default function FormPropsTextFields({ alignment }) {
   useEffect(() => {
     setTotalB((userBValue ? userBValue : myValue) * amountB)
   }, [amountB, userBValue ])
+
+  useEffect(() => {
+    setTotalS((userSValue ? userSValue : myValue) * amountS)
+  }, [amountS, userSValue ])
   
 
   const handleChangeB = (e) => {
@@ -46,7 +50,6 @@ export default function FormPropsTextFields({ alignment }) {
   }
   const handleChangeS = (e) => {
     setAmountS(e.target.value)
-    setTotalS(14)
   }
   
   if (alignment == "Spot") {

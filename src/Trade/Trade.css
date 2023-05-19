@@ -1,4 +1,6 @@
 .trade{
+    /* background-color: aqua;
+    margin: auto; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -7,6 +9,9 @@
 .buttons{
     margin-top: 50px;
     margin-left: 50px;
+}
+.inputs{
+    margin: auto;
 }
 
 .formContainer{
