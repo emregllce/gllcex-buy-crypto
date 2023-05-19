@@ -27,7 +27,7 @@ const Pairs = () => {
     setPairType(e.target.innerHTML.slice(-3));
   };
   const choosePair = (e) => {
-    //console.log(`e.target.innerHTML`, e.target.parentElement.parentElement.children[1].children[0].innerHTML);
+    console.log(`e.target.innerHTML`, e.target.parentElement.parentElement.children[1].children[0].innerHTML);
     dispatch(selectPair(e.target.innerHTML));
     dispatch(setPrice(e.target.parentElement.parentElement.children[1].children[0].innerHTML))
   };

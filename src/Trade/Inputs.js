@@ -6,36 +6,49 @@ import { Button } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  addToFav,
+  setPrice,
+  removeFromFav,
+  selectPair,
+} from "../redux/pairSlice";
 
 export default function FormPropsTextFields({ alignment }) {
+  const dispatch = useDispatch();
   const selectedPair = useSelector((state) => state.pair.selectedPair);
   const pairPrice = useSelector((state) => state.pair.pairPrice);
-  const [myValue, setMyValue] = React.useState(pairPrice);
-  console.log(typeof(pairPrice));
-    // useEffect(() => {
-    //   setTimeout(() => {
-    //     refetch();
-    //   }, 100);
-    // }, [selectedPair]);
-  const PairPrice2 = () => {
-    return axios.get(
-      `https://api.binance.com/api/v3/ticker/price?symbol=${selectedPair}`
-    );
-  };
+  const [myValue, setMyValue] = useState(pairPrice);
+  const [userBValue, setUserBValue] = useState(0);
+  const [userSValue, setUserSValue] = useState(0);
+  const [amountB, setAmountB] = useState(0)
+  const [amountS, setAmountS] = useState(0)
+  const [totalB, setTotalB] = useState(0)
+  const [totalS, setTotalS] = useState(0)
 
-  const { isLoading, isError, error, data, refetch } = useQuery(
-    "pairprice2", // unique querie key
-    PairPrice2
-  );
-  if (isLoading) {
-    return <h4 style={{ textAlign: "center" }}>...</h4>;
+  useEffect(() => {
+    setMyValue(pairPrice);
+    setUserBValue(0);
+    setUserSValue(0);
+    setAmountB(0)
+    setAmountS(0)
+    setTotalB(0)
+    setTotalS(0)
+  }, [pairPrice]);
+
+  useEffect(() => {
+    setTotalB((userBValue ? userBValue : myValue) * amountB)
+  }, [amountB, userBValue ])
+  
+
+  const handleChangeB = (e) => {
+    setAmountB(e.target.value)
   }
-
-  if (isError) {
-    return console.log(`error`, error);
+  const handleChangeS = (e) => {
+    setAmountS(e.target.value)
+    setTotalS(14)
   }
-
+  
   if (alignment == "Spot") {
     return (
       <Box
@@ -49,7 +62,7 @@ export default function FormPropsTextFields({ alignment }) {
         <div className="formContainer">
           <div className="form leftForm">
             <TextField
-            id="outlined-controlled"
+              id="outlined-controlled"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Price</InputAdornment>
@@ -66,15 +79,16 @@ export default function FormPropsTextFields({ alignment }) {
                   flexDirection: "row-reverse",
                 },
               }}
-              value={myValue}
-              onChange={(event) => {
-                setMyValue(event.target.value);
-              }}
-              placeholder={
-                data.data.symbol.slice(-3) == "SDT"
-                  ? "USDT"
-                  : data.data.symbol.slice(-3)
+              // value={
+              //   selectedPair.slice(-3) === "SDT"
+              //     ? myValue + " " + "USDT"
+              //     : myValue + " " + selectedPair.slice(-3)
+              // }
+              value={userBValue 
+                ? userBValue 
+                : myValue
               }
+              onChange={(e) => setUserBValue(e.target.value)}
             />
 
             <TextField
@@ -94,7 +108,9 @@ export default function FormPropsTextFields({ alignment }) {
                   flexDirection: "row-reverse",
                 },
               }}
-              defaultValue="Hello World"
+              value = {amountB}
+              onChange={handleChangeB}
+              placeholder="0"
             />
             <TextField
               InputProps={{
@@ -113,7 +129,7 @@ export default function FormPropsTextFields({ alignment }) {
                   flexDirection: "row-reverse",
                 },
               }}
-              defaultValue="Hello World"
+              value={totalB}
             />
             <Button
               sx={{ width: "42ch", marginLeft: "10px" }}
@@ -124,7 +140,8 @@ export default function FormPropsTextFields({ alignment }) {
             </Button>
           </div>
           <div className="form rightForm">
-            <TextField
+          <TextField
+              id="outlined-controlled"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">Price</InputAdornment>
@@ -141,7 +158,11 @@ export default function FormPropsTextFields({ alignment }) {
                   flexDirection: "row-reverse",
                 },
               }}
-              defaultValue="Hello rrrr"
+              value={userSValue 
+                ? userSValue 
+                : myValue
+              }
+              onChange={(e) => setUserSValue(e.target.value)}
             />
             <TextField
               InputProps={{
@@ -160,7 +181,9 @@ export default function FormPropsTextFields({ alignment }) {
                   flexDirection: "row-reverse",
                 },
               }}
-              defaultValue="Hello rrrr"
+              value = {amountS}
+              onChange={handleChangeS}
+              placeholder="0"
             />
             <TextField
               InputProps={{
@@ -179,7 +202,7 @@ export default function FormPropsTextFields({ alignment }) {
                   flexDirection: "row-reverse",
                 },
               }}
-              defaultValue="Hello rrrr"
+              value={totalS}
             />
             <Button
               sx={{ width: "42ch", marginLeft: "10px" }}

@@ -48,7 +48,7 @@ const MarketHistory = () => {
           <p>Time</p>
         </div>
       </div>
-      {data?.data?.slice(0, 20).map((history) => {
+      {data?.data?.slice(480, 500).reverse().map((history) => {
         const date = new Date(history.time);
         const formattedTime = date.toLocaleTimeString("en-US", {
           timeZone: "GMT",

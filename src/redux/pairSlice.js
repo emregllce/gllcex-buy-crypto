@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     favoritePairs : [],
     selectedPair : "BTCUSDT",
-    pairPrice:"",
+    pairPrice:0,
     searchPairs: ""
 }
 
