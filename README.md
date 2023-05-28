@@ -5,7 +5,7 @@ https://gllcex-buy-crypto.netlify.app/
 
 The project aimed to develop a practical cryptocurrency trading platform. In the project;
 	
-	=>On the right upper side of the window, you will see all the crypto pairs with their current price and the price change with some display options like; displaying only BTC or USDT pairs, searching for any pair with its name by using the search box in the appbar; adding/removing pairs to your favorites. In this window whenever you click on any pair:
+	> On the right upper side of the window, you will see all the crypto pairs with their current price and the price change with some display options like; displaying only BTC or USDT pairs, searching for any pair with its name by using the search box in the appbar; adding/removing pairs to your favorites. In this window whenever you click on any pair:
   	
 	> On the left side, you can view the current price of the selected pair along with the current bid and ask orders (buy and sell orders). In this section, data is fetched every one-fifth of a second without rendering the       page, thanks to React Query.
   	
