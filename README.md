@@ -8,7 +8,7 @@ The project aimed to develop a practical cryptocurrency trading platform. In the
 	On the left side, you can view the current price of the selected pair along with the current bid and ask orders (buy and sell orders). In this section, data is fetched every one-fifth of a second without rendering the       page, thanks to React Query.   
 	In the upper middle section, a chart for the selected pair will be displayed, and the user will have the option to change the interval by clicking the buttons below the chart.    
 	In the lower middle section, the user can enter the price and the quantity to buy or sell for the selected pair. These inputs are used as controlled inputs and are interconnected.     
-	In the bottom right section, you can see the market history of the selected pair. Data is fetched every one-fifth of a second in this section as well.
+	In the bottom right section, you can see the market history of the selected pair. Data is fetched every one-fifth of a second in this section as well.   
 	Tools used: React, Redux-Toolkit, React-Query, RestAPI, MUI, Tradingview LightChart, 
 
 
